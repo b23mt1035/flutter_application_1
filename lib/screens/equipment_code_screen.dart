@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
-import 'checklist_screen.dart'; // This screen we'll build next
+import 'checklist_screen.dart';
 
 class EquipmentCodeScreen extends StatelessWidget {
   final String category;
 
-  EquipmentCodeScreen({required this.category});
+  const EquipmentCodeScreen({super.key, required this.category});
 
-  final Map<String, List<String>> equipmentCodes = {
-    "AIR CURTAIN": ['500601', '500602', '500603', '500604', '500605'],
-    "ARC WELDING MACHINE": ['500701', '500702'],
-    "BOILER": ['500801', '500802'],
-    "CHAPATI MACHINE": ['501001', '501002'],
-    "COLD ROOM": ['501101', '501102'],
-    "DAL TANK": ['501201', '501202'],
-    "DAL COOKER": ['501301', '501302'],
+  final Map<String, List<String>> equipmentCodes = const {
+    "AIR HANDLING UNIT (AHU)": ['600101', '600102'],
+    "AIR CURTAIN": ['600201', '600202', '600203'],
+    "ARC WELDING MACHINE": ['600301', '600302'],
+    "BOILER DAILY CHECKLIST": ['600401'],
+    "Boiler WEEKLY CHECKLIST": ['600402'],
+    "CHAPATI MACHINE": ['600501', '600502'],
+    "COLD ROOM": ['600601', '600602'],
+    "DAL TANK": ['600701', '600702'],
+    "DAL COOKER": ['600801', '600802'],
+    "DIESEL GENERATOR": ['600901', '600902'],
+    "EXHAUST FANS": ['601001', '601002', '601003'],
+    "GAS BANK AND LINES": ['601101'],
+    "HAND DRIER": ['601201', '601202'],
+    "HAND SANITIZING DISPENSOR": ['601301'],
+    "HYDARULIC TROLLY": ['601401', '601402'],
+    "JET WASHING MACHINE": ['601501'],
+    "ATTA KNEADING MACHINE": ['601601', '601602'],
+    "Panel Board": ['601701', '601702'],
+    "POTATO PEELER": ['601801'],
+    "RICE CHUTE": ['601901'],
+    "RICE CLEANING MACHINE": ['602001'],
+    "RICE COOKER": ['602101', '602102'],
+    "SEASONING BHATTI": ['602201'],
+    "TILTING WET GRINDER": ['602301'],
+    "UPS": ['602401', '602402'],
+    "VEGETABLE CUTTING MACHINE": ['602501', '602502'],
+    "VEGETABLE WASHING MACHINE": ['602601', '602602'],
   };
 
   @override
@@ -22,22 +42,26 @@ class EquipmentCodeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(category),
         centerTitle: true,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(12),
         itemCount: codes.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[200],
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+          return Card(
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              title: Text(
+                "Equipment Code: ${codes[index]}",
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-              onPressed: () {
+              subtitle: Text(
+                category,
+                style: TextStyle(color: Colors.grey[600], fontSize: 14),
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -48,7 +72,6 @@ class EquipmentCodeScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: Text("Equipment Code: ${codes[index]}", style: const TextStyle(fontSize: 16)),
             ),
           );
         },
